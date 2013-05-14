@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project xmlns="http://maven.apache.org/site"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://maven.apache.org/site http://maven.apache.org/maven-navigation-1.0.xsd"
+    name="${project.name}">      
+    
+    <body>        
+        
+        <menu ref="reports" />
+        
+    </body>
+    
+</project>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:syn="http://purl.org/rss/1.0/modules/syndication/" xmlns:admin="http://webns.net/mvcb/" xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0">
+  <channel rdf:about="http://slashdot.org/">
+    <title>Slashdot</title>
+    <link>http://slashdot.org/</link>
+    <description>News for nerds, stuff that matters</description>
+    <dc:language>en-us</dc:language>
+    <dc:rights>Copyright 1997-2005, OSTG - Open Source Technology Group, Inc.  All Rights Reserved.</dc:rights>
+    <dc:date>2005-09-16T19:50:58+00:00</dc:date>
+    <dc:publisher>OSTG</dc:publisher>
+    <dc:creator>pater@slashdot.org</dc:creator>
+    <dc:subject>Technology</dc:subject>
+    <syn:updatePeriod>hourly</syn:updatePeriod>
+    <syn:updateFrequency>1</syn:updateFrequency>
+    <syn:updateBase>1970-01-01T00:00+00:00</syn:updateBase>
+    <items>
+      <rdf:Seq>
+        <rdf:li rdf:resource="http://yro.slashdot.org/article.pl?sid=05/09/16/1652252&amp;from=rss" />
+        <rdf:li rdf:resource="http://it.slashdot.org/article.pl?sid=05/09/16/182232&amp;from=rss" />
+        <rdf:li rdf:resource="http://games.slashdot.org/article.pl?sid=05/09/16/1736236&amp;from=rss" />
+        <rdf:li rdf:resource="http://it.slashdot.org/article.pl?sid=05/09/16/1648255&amp;from=rss" />
+        <rdf:li rdf:resource="http://developers.slashdot.org/article.pl?sid=05/09/16/1458211&amp;from=rss" />
+        <rdf:li rdf:resource="http://science.slashdot.org/article.pl?sid=05/09/16/1514216&amp;from=rss" />
+        <rdf:li rdf:resource="http://linux.slashdot.org/article.pl?sid=05/09/16/155221&amp;from=rss" />
+        <rdf:li rdf:resource="http://science.slashdot.org/article.pl?sid=05/09/16/1423201&amp;from=rss" />
+        <rdf:li rdf:resource="http://apple.slashdot.org/article.pl?sid=05/09/16/1227239&amp;from=rss" />
+        <rdf:li rdf:resource="http://developers.slashdot.org/article.pl?sid=05/09/16/1217257&amp;from=rss" />
+      </rdf:Seq>
+    </items>
+    <image rdf:resource="http://images.slashdot.org/topics/topicslashdot.gif" />
+    <textinput rdf:resource="http://slashdot.org/search.pl" />
+  </channel>
+  <image rdf:about="http://images.slashdot.org/topics/topicslashdot.gif">
+    <title>Slashdot</title>
+    <url>http://images.slashdot.org/topics/topicslashdot.gif</url>
+    <link>http://slashdot.org/</link>
+  </image>
+  <item rdf:about="http://yro.slashdot.org/article.pl?sid=05/09/16/1652252&amp;from=rss">
+    <title>RIAA Says P2P Encourages Illegal Downloads</title>
+    <link>http://rss.slashdot.org/Slashdot/slashdot?m=586</link>
+    <description>stlhawkeye writes "The RIAA is at it again, attacking inconvenient technology because it can be abused. They have sent another round of letters to P2P services, asking them to stop "encouraging users" to illegally distribute copyrighted material. eDonkey, LimeWire, and Kazaa are all on the RIAA's hit list, along with 2Hub, BitTorrent, WinMX and Free Peers, maker of file-swapping software BearShare. One wonders how they intend to attack BitTorrent, which can be and is used in legitimate mass distribution efforts of legal material, such as World of Warcraft patches. Are FTP and /usr/sbin/scp next?"</description>
+    <dc:creator>Zonk</dc:creator>
+    <dc:date>2005-09-16T19:47:00+00:00</dc:date>
+    <dc:subject>doj</dc:subject>
+    <slash:department>i-heard-IT-departments-also-encourage-bad-security</slash:department>
+    <slash:section>yro</slash:section>
+    <slash:hitparade>5,4,4,1,0,0,0</slash:hitparade>
+    <slash:comments>5</slash:comments>
+    <feedburner:origLink>http://yro.slashdot.org/article.pl?sid=05/09/16/1652252&amp;from=rss</feedburner:origLink>
+  </item>
+  <item rdf:about="http://it.slashdot.org/article.pl?sid=05/09/16/182232&amp;from=rss">
+    <title>Is The Firefox Honeymoon Over?</title>
+    <link>http://rss.slashdot.org/Slashdot/slashdot?m=585</link>
+    <description>prostoalex writes "With Firefox market share reaching a substantial level, is the popular Internet browser becoming a security nightmare for IT administrators? George Ou takes a look at the hard numbers. From the article: 'From March 2005 to September 2005 10 vulnerabilities were published for Microsoft Internet Explorer, 40 for Mozilla Firefox. In April-September timespan there were 6 exploits for MSIE, 11 for Firefox. Conclusion? As you can see, the facade that Firefox is the cure to the Internet Explorer security blues is quickly fading. It just goes to prove that any popular software worth hacking that has security vulnerabilities will eventually have to deal with live working exploits. Firefox mostly managed to stay under the radar from hackers before April of 2005.'"</description>
+    <dc:creator>Zonk</dc:creator>
+    <dc:date>2005-09-16T19:10:00+00:00</dc:date>
+    <dc:subject>mozilla</dc:subject>
+    <slash:department>back-to-reality</slash:department>
+    <slash:section>it</slash:section>
+    <slash:hitparade>162,158,125,78,25,14,10</slash:hitparade>
+    <slash:comments>162</slash:comments>
+    <feedburner:origLink>http://it.slashdot.org/article.pl?sid=05/09/16/182232&amp;from=rss</feedburner:origLink>
+  </item>
+  <item rdf:about="http://games.slashdot.org/article.pl?sid=05/09/16/1736236&amp;from=rss">
+    <title>Plotting the Revolution's Arc</title>
+    <link>http://rss.slashdot.org/Slashdot/slashdot?m=584</link>
+    <description>Very few things surprise me about videogames anymore. I won't claim to be all-knowing by any means, but there are very few genuine surprises these days. Release dates are known well in advance, endless features and interviews are conducted with developers during the course of a game's creation, and what few elements that publishers try to keep under wraps get leaked to the media by individuals wanting their moment in the sun. Even the big gaming news stories of this past year (Hot Coffee, the PS3 PreRendered Movie Debate) were more frustrating than surprising. Happily, Nintendo managed to pull a rabbit out of their hat. Today's announcement of exactly what the revolution behind the Revolution will be is nothing short of a showstopper. Read on for my reaction to Nintendo's new bid for the brass ring.
+&lt;p&gt;&lt;a href="http://rss.slashdot.org/~a/Slashdot/slashdot?a=gbJdxe"&gt;&lt;img src="http://rss.slashdot.org/~a/Slashdot/slashdot?i=gbJdxe" border="0"&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    <dc:creator>Zonk</dc:creator>
+    <dc:date>2005-09-16T18:43:00+00:00</dc:date>
+    <dc:subject>editorial</dc:subject>
+    <slash:department>breaking-gravity's-pull-or-spiralling-in</slash:department>
+    <slash:section>games</slash:section>
+    <slash:hitparade>163,156,116,73,17,6,4</slash:hitparade>
+    <slash:comments>163</slash:comments>
+    <feedburner:origLink>http://games.slashdot.org/article.pl?sid=05/09/16/1736236&amp;from=rss</feedburner:origLink>
+  </item>
+  <item rdf:about="http://it.slashdot.org/article.pl?sid=05/09/16/1648255&amp;from=rss">
+    <title>Canada-Wide Wireless Broadband Network Planned</title>
+    <link>http://rss.slashdot.org/Slashdot/slashdot?m=583</link>
+    <description>twilight30 writes "From the Globe and Mail, Rogers Communications Inc. and Bell Canada have said they will put aside their competitive differences to jointly build and manage a Canada-wide wireless broadband network. It is hoped they will initially reach more than two-thirds of Canadians in less than three years." From the article: "The two communications companies will pool their wireless broadband spectrum into a joint venture called Inukshuk Internet Inc. The network will cover more than 40 cities, and 50 rural and remote communities across the country. Users will be able to access the Internet and use voice, video streaming and data applications both inside their home, as well as on the go."</description>
+    <dc:creator>Zonk</dc:creator>
+    <dc:date>2005-09-16T17:48:00+00:00</dc:date>
+    <dc:subject>wireless</dc:subject>
+    <slash:department>big-maple-leaf</slash:department>
+    <slash:section>it</slash:section>
+    <slash:hitparade>126,122,95,56,18,9,5</slash:hitparade>
+    <slash:comments>126</slash:comments>
+    <feedburner:origLink>http://it.slashdot.org/article.pl?sid=05/09/16/1648255&amp;from=rss</feedburner:origLink>
+  </item>
+  <item rdf:about="http://developers.slashdot.org/article.pl?sid=05/09/16/1458211&amp;from=rss">
+    <title>Lego Welcomes Hack Of Their Design Program</title>
+    <link>http://rss.slashdot.org/Slashdot/slashdot?m=582</link>
+    <description>fdiskne1 writes "We've all heard about big companies suing their customers for hacking a product they purchased. It's about time we hear about a company that welcomes it. One of the most geek-friendly toys has just gotten geek-friendlier. CNet News.com has a story about how the Lego company is cheering the fact that people are hacking their public design program to better fit their customers' needs. Lego has a free program (available for Windows and Mac) that allows a person to put in their own 3D design and the program will tell the customer which Lego 'palettes' they need to order to complete the design. The problem with it was that the palettes each contained a number of bags of different shape and color Lego blocks. If someone needed only one block out of a particular palette, they would end up with many bags of bricks they didn't need. The hack involved someone taking an inventory of how many bricks are included in each bag. The program would then tell the customer how many BAGS of each to order, greatly reducing the number of bricks the customer would have ended up not using in the project. I can think of many companies that wouldn't think of doing such a thing. In fact, I can think of many companies that would intentionally use the flaw in their program to make the customer buy even more."</description>
+    <dc:creator>Zonk</dc:creator>
+    <dc:date>2005-09-16T17:09:00+00:00</dc:date>
+    <dc:subject>toys</dc:subject>
+    <slash:department>come-on-in</slash:department>
+    <slash:section>developers</slash:section>
+    <slash:hitparade>112,107,84,57,32,22,13</slash:hitparade>
+    <slash:comments>112</slash:comments>
+    <feedburner:origLink>http://developers.slashdot.org/article.pl?sid=05/09/16/1458211&amp;from=rss</feedburner:origLink>
+  </item>
+  <item rdf:about="http://science.slashdot.org/article.pl?sid=05/09/16/1514216&amp;from=rss">
+    <title>Global Warming Past The Point of No Return</title>
+    <link>http://rss.slashdot.org/Slashdot/slashdot?m=581</link>
+    <description>mad_goldfish writes "The UK's Independent is running a front page story today on a scientific report claiming that global warming is now unstoppable, after measuring changes in the level of ice in the arctic." From the article: "The greatest fear is that the Arctic has reached a 'tipping point' beyond which nothing can reverse the continual loss of sea ice and with it the massive land glaciers of Greenland, which will raise sea levels dramatically. Satellites monitoring the Arctic have found that the extent of the sea ice this August has reached its lowest monthly point on record, dipping an unprecedented 18.2 per cent below the long-term average." Either way, someone wins a bet.</description>
+    <dc:creator>Zonk</dc:creator>
+    <dc:date>2005-09-16T16:28:00+00:00</dc:date>
+    <dc:subject>science</dc:subject>
+    <slash:department>more-swimming-opportunities</slash:department>
+    <slash:section>science</slash:section>
+    <slash:hitparade>653,643,525,380,108,45,29</slash:hitparade>
+    <slash:comments>653</slash:comments>
+    <feedburner:origLink>http://science.slashdot.org/article.pl?sid=05/09/16/1514216&amp;from=rss</feedburner:origLink>
+  </item>
+  <item rdf:about="http://linux.slashdot.org/article.pl?sid=05/09/16/155221&amp;from=rss">
+    <title>A Gimp In Photoshop's Clothing</title>
+    <link>http://rss.slashdot.org/Slashdot/slashdot?m=580</link>
+    <description>comforteagle writes "Scott Moschella, from Attack of the Show!, set out to make The Gimp a little friendlier with a simple UI make-over, creating GimpShop. Despite an outcry from some developers, users have picked it up with passion. Howard Wen has interviewed Scott about why he did this. From the interview: 'I've always thought that GIMP was just as powerful as Photoshop. My way of proving it was to make GIMP work as close to Photoshop as I possibly could, given my limited programming experience.' As more Windows/Mac users discover powerful open source applications are they bound (slashdot disc.) to make more discoveries of this kind?" Update: 09/16 18:48 GMT by Z : Some users have pointed out this is basically an update to a previous discussion we've had. Link added for the sake of completeness.</description>
+    <dc:creator>Zonk</dc:creator>
+    <dc:date>2005-09-16T15:53:00+00:00</dc:date>
+    <dc:subject>gimp</dc:subject>
+    <slash:department>watch-the-teeth</slash:department>
+    <slash:section>linux</slash:section>
+    <slash:hitparade>350,344,272,199,59,30,22</slash:hitparade>
+    <slash:comments>350</slash:comments>
+    <feedburner:origLink>http://linux.slashdot.org/article.pl?sid=05/09/16/155221&amp;from=rss</feedburner:origLink>
+  </item>
+  <item rdf:about="http://science.slashdot.org/article.pl?sid=05/09/16/1423201&amp;from=rss">
+    <title>Missing Lab Mice Infected With Plague</title>
+    <link>http://rss.slashdot.org/Slashdot/slashdot?m=579</link>
+    <description>Buford C Nuzzle-Chunks writes "PhysOrg is reporting that 'The FBI and New Jersey officials have started a hushed but intensive search for three missing lab mice reportedly infected with deadly strains of plague'. The Washington Post says it's not that big a deal, but I was dismayed at the PhysOrg article's quote from Richard Ebright, a Rutgers University microbiologist, about certain federal bio-terrorism labs: 'You have more security at a McDonald's than at some of these facilities.'"
+&lt;p&gt;&lt;a href="http://rss.slashdot.org/~a/Slashdot/slashdot?a=5fdh4d"&gt;&lt;img src="http://rss.slashdot.org/~a/Slashdot/slashdot?i=5fdh4d" border="0"&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    <dc:creator>Zonk</dc:creator>
+    <dc:date>2005-09-16T15:12:00+00:00</dc:date>
+    <dc:subject>biotech</dc:subject>
+    <slash:department>who-wants-bubons-i-do-i-do</slash:department>
+    <slash:section>science</slash:section>
+    <slash:hitparade>264,262,203,129,43,25,21</slash:hitparade>
+    <slash:comments>264</slash:comments>
+    <feedburner:origLink>http://science.slashdot.org/article.pl?sid=05/09/16/1423201&amp;from=rss</feedburner:origLink>
+  </item>
+  <item rdf:about="http://apple.slashdot.org/article.pl?sid=05/09/16/1227239&amp;from=rss">
+    <title>Why Apple Picked Intel Over AMD</title>
+    <link>http://rss.slashdot.org/Slashdot/slashdot?m=578</link>
+    <description>An Anonymous Reader writes "Macworld has a piece looking at why Apple chose Intel chips over AMD's offerings when it decided to move away from IBM." From the article: "The reason, industry analysts say, is that Jobs has a clear goal in mind: innovative designs. And such designs require the lowest-voltage chips, which IBM and Freescale were not going to make with the PowerPC chip core--and which AMD has not yet perfected 'This is a practical, pragmatic Steve Jobs decision,' says Shane Rau, Program Manager, PC Semiconductors for market research firm IDC. Intel serves up the most complete line of low-power chips for mobile and small form factor computers, and a good-looking future roadmap for it. Also, Intel's mammoth production capacity erases any supply worries. "</description>
+    <dc:creator>Zonk</dc:creator>
+    <dc:date>2005-09-16T14:31:00+00:00</dc:date>
+    <dc:subject>intel</dc:subject>
+    <slash:department>low-power-and-made-of-chocolate</slash:department>
+    <slash:section>apple</slash:section>
+    <slash:hitparade>280,265,208,153,60,26,21</slash:hitparade>
+    <slash:comments>280</slash:comments>
+    <feedburner:origLink>http://apple.slashdot.org/article.pl?sid=05/09/16/1227239&amp;from=rss</feedburner:origLink>
+  </item>
+  <item rdf:about="http://developers.slashdot.org/article.pl?sid=05/09/16/1217257&amp;from=rss">
+    <title>Indonesia Adopts Java Desktop System on Linux</title>
+    <link>http://rss.slashdot.org/Slashdot/slashdot?m=577</link>
+    <description>UltimaGuy wrote to mention a DesktopLinux.com article discussing Indonesia's adoption of a Java Desktop System on Linux as a national OS. From the article: "This desktop software will be a major component of the new Indonesia Goes Open Source (IGOS) program that aims to help eliminate the "digital divide in the world's largest archipelago," the ministry and Sun Microsystems said in a joint announcement. The ministry said it will develop its own IGOS-branded software stack using JDS on Linux as the base platform. The agreement with Sun -- for an unspecified number of years -- has the goal of installing copies of the open source-based desktop across Indonesia, beginning with its government-affiliated offices, the ministry said."</description>
+    <dc:creator>Zonk</dc:creator>
+    <dc:date>2005-09-16T13:47:00+00:00</dc:date>
+    <dc:subject>java</dc:subject>
+    <slash:department>it's-nice-when-a-country-and-an-os-can-get-together</slash:department>
+    <slash:section>developers</slash:section>
+    <slash:hitparade>125,114,93,58,23,8,6</slash:hitparade>
+    <slash:comments>125</slash:comments>
+    <feedburner:origLink>http://developers.slashdot.org/article.pl?sid=05/09/16/1217257&amp;from=rss</feedburner:origLink>
+  </item>
+  <textinput rdf:about="http://slashdot.org/search.pl">
+    <title>Search Slashdot</title>
+    <description>Search Slashdot stories</description>
+    <name>query</name>
+    <link>http://slashdot.org/search.pl</link>
+  </textinput>
+</rdf:RDF>
+

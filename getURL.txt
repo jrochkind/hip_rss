@@ -1,0 +1,76 @@
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+Say you want to include some content produced by a different server right in the middle of your HIP page.  This document describes how you can do it.  For instance, if you are good at programming in ColdFusion and would like to include content produced by ColdFusion scripts, you can use this method.  We use this method widely to make up for shortcomings or bugs in HIP.
+
+This document assumes you are very comfortable with XSL and with editing XSL stylesheets.  Please do not do this on a production server without trying it on a test server first.  No support of any kind is offered for working with this utility.  Editing XSL stylesheets may very well cause your server to crash, ruin your marriage and void your warranty.  Please do not do so unless you are prepared to suffer the consequences.
+
+1.) Grab the file Utils.jar in this ZIP file in the "optional" directory
+2.) Put the Utils.jar file in your dynix\xsl\lib directory.
+3.) Edit each of your dynix\xsl\start#.bat files and add the following line:
+
+set XSL_CLASSPATH=%XSL_CLASSPATH%;./lib/Utils.jar
+
+after the other set XSL_CLASSPATH statements.  eg. my start.bat, start2.bat, etc. look like:
+
+...
+set XSL_CLASSPATH=.
+set XSL_CLASSPATH=%XSL_CLASSPATH%;./lib/dynix-xsl-proc.jar
+set XSL_CLASSPATH=%XSL_CLASSPATH%;./lib/dynix-util.jar
+set XSL_CLASSPATH=%XSL_CLASSPATH%;./lib/saxon.jar
+set XSL_CLASSPATH=%XSL_CLASSPATH%;%JAVA_HOME%/jre/lib/ext/jce1_2_1.jar
+set XSL_CLASSPATH=%XSL_CLASSPATH%;%JAVA_HOME%/jre/lib/ext/US_export_policy.jar
+set XSL_CLASSPATH=%XSL_CLASSPATH%;%JAVA_HOME%/jre/lib/ext/sunjce-provider.jar
+set XSL_CLASSPATH=%XSL_CLASSPATH%;./lib/jboss.jar
+set XSL_CLASSPATH=%XSL_CLASSPATH%;./lib/jboss-j2ee.jar
+set XSL_CLASSPATH=%XSL_CLASSPATH%;./lib/log4j.jar
+set XSL_CLASSPATH=%XSL_CLASSPATH%;./lib/jboss-common-client.jar
+REM begin SPL custom
+set XSL_CLASSPATH=%XSL_CLASSPATH%;./lib/Utils.jar
+REM end SPL custom
+for %%i in ("%_HOME_DIR%\lib\*.jar") do set XSL_CLASSPATH=%XSL_CLASSPATH%;
+...
+etc.
+
+4.) Now, for each XSL stylesheet you want to incorporate external content into, you need to change the <xsl:stylesheet> declaration at the top.  This is called declaring the namespace.  You change this declaration from:
+
+	<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	
+	to
+	
+	<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 		xmlns:Utils="/org.spl.utils.Utils" exclude-result-prefixes="Utils">
+	
+Some pages have other namespaces defined.  For instance, the one in fullnonmarcbib.xsl looks like:
+
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:netlib="/com.dynix.util.ulURLAPI"
+xmlns:stringex="/com.dynix.util.StringEx"
+xmlns:termhighlight="/com.dynix.util.TermHighlight"
+xmlns:URLEncoder="/com.dynix.util.IpacURLEncoder"
+xmlns:URLDecoder="/java.net.URLDecoder">
+
+You would alter that to:
+
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:netlib="/com.dynix.util.ulURLAPI"
+xmlns:stringex="/com.dynix.util.StringEx"
+xmlns:termhighlight="/com.dynix.util.TermHighlight"
+xmlns:URLEncoder="/com.dynix.util.IpacURLEncoder"
+xmlns:URLDecoder="/java.net.URLDecoder"
+xmlns:Utils="/org.spl.utils.Utils" exclude-result-prefixes="Utils">
+
+
+5.) Any place in the stylesheet you want to incorporate external content, first put together the URL that you are going to need to get the external content.  For instance, if you had an external ColdFusion script called fancypants.cfm that takes a bib number and does some cool thing with it (say, produces a list of suggestions of other books you might like), you would put together the following URL:
+
+<xsl:variable name="theURL">http://myserverthathasthecoldfusionscriptonit/fancypants.cfm?bibNum=<xsl:value-of select="//key" /></xsl:variable>
+
+6.) to actually make the stylesheet get that URL and print it out in the HTML, you would do the following:
+
+<xsl:value-of select="Utils:getURL( $theURL ) " />
+
+The getURL fetches the page and prints out the result.
+
+Note that you can't do it in one shot.  You can only pass in an XSL variable to the function.  The following will NOT work:
+
+<xsl:value-of select="Utils:getURL( http://myserver/fancypants.xmf?bibNum=....) " />

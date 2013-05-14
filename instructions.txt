@@ -1,0 +1,293 @@
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+This product includes software developed by the
+OpenSymphony Group (http://www.opensymphony.com/).
+
+This product includes software Copyright (c) 2005, Paul Tuckey. ( http://tuckey.org/urlrewrite )
+
+~~~~~~~~~~~~~~
+SPL RSS v0.5
+9/20/2005
+~~~~~~~~~~~~~
+What's new?
+	1) many bug fixes and ground-up redesign of codebase
+	2) support for multiple stylesheets
+	3) encrypted token access for patron feeds (so barcode and PIN are not in the URL)
+	4) XSL stylesheet to make feeds look nice in a web browser instead of confusing XML
+	5) results in RDF
+	6) support for feeds from files
+	7) feeds from a list of any bib numbers (so you can provide a feed of NY Times bestsellers owned by your 	library, for instance, or staff's favorites)
+	8) support for HTTP BASIC authentication for holds/items out feeds
+
+~~~~~~~~~~~~~
+General Description: This is a software package which allows your library to provide RSS feeds from data from the library's catalog.  There are quite a few types of feeds available.  After reviewing each type of feed, these instructions will walk you through the basics of getting the software set up.  In the URL's given below, "myipacserver" should be replaced by the DNS name of your HIP server that you are installing this on.
+
+1.) Searches
+
+Turn the results of any keyword search in Horizon into an RSS feed.  When new items are added to your catalog matching the search term(s), limits, etc. set up in the feed, your patron will get a new RSS alert.  You can basically just take everything that appears after the ipac.jsp? in any search url and place it after the RSS, for instance if your search URL was
+
+http://myipacserver/ipac20/ipac.jsp?term=cats&index=.TW&limit=3100004
+
+then you can get the RSS feed of the results from:
+
+http://myipacserver/rss?term=cats&index=.TW&limit=3100004
+
+So when a new book is added that matches the searching criteria (contains the term cats in the title), anybody subscribed to the feed will get a new story alerting them of the new book.
+
+If you have all of the configuration settings correctly set up, a patron can use something as simple as
+
+http://myipacserver/rss?term=cats
+
+to keep track of the most recent books about cats added to your system.
+
+2.) Holds
+
+A patron's holds feed contains all of the items they have on hold, both active and inactive.  When a new hold is placed, a hold is filled or a hold is made active from inactive, the patron will get a new RSS alert.
+
+The URL for holds is:
+
+http://myipacserver/rss/holds.jsp?barcode=<patron's barcode>&pin=<patron's PIN>
+or
+http://myipacserver/rss/holds.jsp?id=<encrypted ID>
+
+(the encrypted ID is more secure but requires some setup, explained below)
+
+3.) Items out
+
+A patron's items out feed contains all of the items they have checked out.  When an item is checked out or an already checked out item will be due in 5 days or fewer, or is overdue, a new alert will be generated.	
+
+http://myipacserver/rss/itemsout.jsp?barcode=<patron's barcode>&pin=<patron's PIN>
+or
+http://myipacserver/rss/itemsout.jsp?id=<encrypted ID>
+
+(the encrypted ID is more secure but requires some setup, explained below)
+
+4.) OpenSearch 1.0
+
+Search results in Amazon.com's extension to RSS for combining results from multiple search engines (see http://opensearch.a9.com for details).  OpenSearch will be a major part of Internet Explorer 7.0.
+
+The opensearch description document (you need to know this to register your site with A9):
+
+http://myipacserver/rss/opensearch.xml
+
+5.) Recently added materials
+
+The most recently cataloged materials in your collection.  To see the last 100 items added to the system, you can go to
+
+http://myipacserver/rss?type=recentlyadded&num=30
+
+to see the 30 or so most recently added titles to the system.
+
+6.) Predefined feeds
+
+Provide a nice clean alias for a complex search.  Instead of having to type in:
+
+http://myipacserver/rss?npp=10&ipp=20&spp=20&profile=cen&ri=&index=.GW&term=mystery&oper=and&source=%7E%21horizon&limitbox_1=MD01+%3D+dvdsmd+and+MT01+%3D+mt_g&limitbox_3=LA01+%3D+la_eng&limitbox_4=PD01+%3D+2005+or+PD01+%3D+2006
+
+for a feed of recently added mystery DVD's that have been published since 2005, you can just have
+
+http://myipacserver/rss/pre/new-mystery-dvds
+
+You can also make predefined feeds based on a list of bib #'s, so for instance, if you go and take down a list of all the bib numbers of all the items in your catalog on the NYT bestseller list, you can have an RSS feed with a URL like
+
+http://myipacserver/rss/pre/nyt-bestsellers
+
+which has a list of the NYT bestsellers that link back to the items in your catalog.
+
+
+7.) feed of any list of bib numbers.  Say you want to have an RSS feed that contains bib numbers 123, 234 and 345. The following URL will give it to you:
+
+http://myipacserver/rss?type=bibnumbers&keys=123,234,345
+
+If you want to have a nice alias for an arbitrary list of bib keys, you should use a predefined feed instead.
+
+~~~~~~~~~~~
+Setting up:
+~~~~~~~~~~~
+1.) The usual caveats: this software is released under the BSD license.  It is completely unsupported by the Seattle Public Library and is free to use for commercial or non-commercial purposes.  We highly recommend you become familiar with the BSD license and what rights it gives you as a user of the software.  The Seattle Public Library cannot provide any assistance with installation, usage or modification of the software.
+
+The software uses code from the URLRewriteFilter project by Paul Tuckey: http://tuckey.org/urlrewrite/
+
+This product includes software developed by the OpenSymphony Group (http://www.opensymphony.com/) [OSCache, for caching data from HIP].
+
+2.) If you have installed a previous version of the RSS servlet, you will want to remove the old version.  There is no smooth upgrade path because so many things have changed with the setup.  If you did not have a previous version, skip to step 3.
+
+To uninstall an older version:
+	a) stop JBoss
+	b) remove the following files from the jboss/server/default/lib directory (if present):
+		commons-beanutils.jar, commons-collections.jar, commons-digester.jar, commons-logging.jar, 
+		commons-logging-api.jar, jakarta-oro-2.0.8.jar, oscache-2.1.jar, servlet-api.jar, 
+		urlrewrite-2.0-beta.jar
+	c) remove the rss.war directory from the jboss/server/default/deploy dir.
+	d) delete everything in the jboss/server/default/tmp directory (otherwise you will get weird "method not found" 	and "class missing" errors)
+
+3.) Go into the folder you extracted the contents of this zip to navigate to the rss.war/feed-cache directory.  
+
+4.) Open up the general.properties file and go through each setting described there (instructions for each setting is included in the file).  Make sure you get the last 4 settings correct (BaseURL, itemsout.URL, holds.URL, DatasourceName) or RSS will not work and you'll probably get all sorts of bizarre errors!
+
+5.) open up the variables.xsl file and go through each setting described there.
+
+This is all you *need* to do to get running with it.  There are a lot more things you can configure (see the following sections and "Experts Only" section at the end if you're curious)
+
+6.)  Put the rss.war directory that you've been editing these files in into your jboss/server/default/deploy directory.  Put the rssres.war directory in the deploy directory as well.
+
+7.) restart JBoss
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Setting up predefined feeds:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can set up feeds that give your users a nice, clean URL for a more complex query.  You can even give a nice clean URL for a list of bib numbers, which allows you to create all sorts of "my favorite ..." or bestseller feeds.
+		
+The feeds.properties file allows you to pre-define feeds for people (for instance, for a search that involves applying a couple of limits and a sort, which makes for a really ugly URL).  If you put an entry in your feeds.properties file which says:
+
+neat-stuff = http://myipacserver/ipac20/ipac.jsp?term\=dogs&index\=.GW&npp\=30&GetXML\=true
+
+then you can get the same results as if you had brought up the URL
+
+http://myipacserver/rss?term=dogs&index=.GW&npp=30
+
+by going to 
+
+http://myipacserver/rss?type=predef&term=neat-stuff
+or
+http://myipacserver/rss/pre/neat-stuff
+
+MAKE SURE THAT YOU replace all = signs in any urls you set up with \=
+
+******
+To make a predefined feed from a list of bib numbers, you make an entry like the following in feeds.properties:
+
+test = bibkeys:123,456,789
+
+then if you go to
+http://myipacserver/rss/pre/test
+
+it gives you a feed consisting of bib numbers 123,456 and 789.
+
+The nice thing here is that you can change what bibs an alias points to transparently to any subscribers.  So you can use this to keep a list of bestsellers or the like.
+
+The part to the right of the = sign MUST start with bibkeys: and then be followed with a comma delimited list of bib numbers.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Setting up encrypted token access to holds/items out:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following steps are optional.  Without completing these steps a patron can still get a feed of their holds by going to 
+
+http://myipacserver/rss/itemsout.jsp?barcode=<your barcode>&pin=<your PIN>
+http://myipacserver/rss/holds.jsp?barcode=<your barcode>&pin=<your PIN>
+
+(replacing <your barcode> and <your PIN> with their library card barcode and PIN)
+
+~~~
+
+The original version of the RSS servlet had patrons specify their barcode and PIN in the URL for their RSS feeds, eg.
+http://myipacserver/rss/itemsout.jsp?barcode=100001234567&pin=1234
+
+Some of people (rightfully) complained about this being insecure.  To remedy this, the new version has the ability to use an encrypted id (actually an encryption of their borrower#), so, for instance, a patron would instead use the URL:
+
+http://myipacserver/rss/itemsout.jsp?id=R901zJjfUtEhNxZCPjcKYyu8AKsVZDxy
+
+for their items out.  This is far more secure.  Even if somebody else saw this URL, they would have no way of getting your barcode and PIN from it.  
+
+The problem is, of course, how do you tell your patrons to use the id= method?  How do you create an id for someone?  The easiest way is to incorporate it into your XSL stylesheets so the patron sees it when they log in to their account.
+
+The RSS servlet will create an id for somebody with the following URL:
+
+http://localhost/rss?service=encrypt-borrnum&token=<borrower #>
+
+(where <borrower #> is the Horizon borrower number).  By default the encrypt-borrnum service is only accessible via localhost (ie. from the HIP server itself), not remotely.  This is because you don't really want your patron
+
+You can incorporate this into your patronpersonaloptions.xsl stylesheet by using the GetURL() function used by many of SPL's hacks (see getURL.txt for more info).  Something like the following XSL in the patronpersonaloptions.xsl will work
+
+....
+
+<xsl:variable name="theURL">http://localhost/rss?service=encrypt-borrnum&token=<xsl:value-of select="//patronid" /></xsl:variable>
+<xsl:variable name="theToken">Utils:getURL( $theURL )</xsl:variable>
+
+<span class="rss-promotion">You can keep track of your holds and items out by putting the following URLs in your favorite RSS reader:
+
+http://myipacserver/rss/itemsout.jsp?id=<xsl:value-of select="$theToken" />
+http://myipacserver/rss/holds.jsp?id=<xsl:value-of select="$theToken" />
+</span>
+
+....
+
+[ sorry that these instructions are kind of sketchy -- I find it very difficult to write easy to follow instructions for XSL stylesheet modifications that require no knowledge of XSL to use so I have deliberately avoided doing so here. ]
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Setting up the recently added feed
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You do not need to complete these steps for the other types of feeds to work, just the recently added items and the feeds from a list of bib numbers.
+
+1.) do a title browse search in your catalog.
+2.) click on one of the titles
+3.) get the URL in your browser location bar and find the part that says &uri=link=....
+4.) take the part that starts with link= up until the next &.  For instance, in my catalog, that gives me
+
+link=3100007~!288638~!3100001~!3100002
+
+5.) in the above, replace the '=' sign with %3D, replace the ~ signs with %7E and replace the ! signs with %21.  Doing that to the one for my catalog, that gives me
+
+link%3D3100007%7E%21288638%7E%213100001%7E%213100002
+
+6.) in the general.properties file, change the BibNumbersURI = value to the value you formulated in step 5.
+7.) if your title browse search is not based upon the all_title table, change the IndexTableToUse value to the name of the table you do use.
+8.) Verify that the DatasourceName argument is correct.
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~
+Experts Only
+~~~~~~~~~~~~~~~~~~~~~~
+1.) The urlrewrite.xml file allows tremendous flexibility for how your RSS URL's are structured.  Please refer to the creator's website for instructions on modifying it: http://tuckey.org/urlrewrite/
+
+2.) the oscache.properties file allows you to change how RSS data is cache on the server. Please refer to the creator's website for instructions on modifying it: http://www.opensymphony.com/oscache/
+
+3.) The stylesheet.properties file maps between style names and the XSL stylesheet that will be used to transform the content.  For instance, say you create a new XSL stylesheet called "foo.xsl".  If you put the foo.xsl file in the feed-cache directory and add a new line to stylesheet.properties that says
+
+foo = foo.xsl
+
+then if you append &style=foo to any RSS feed URL, it will render the feed with foo.xsl instead of with the default  (which is feed.xsl).
+
+For instance
+
+http://myipacserver/rss?term=cats&style=rdf
+
+will use the rdf.xsl stylesheet instead of the default.
+
+4.) The file.properties file allows you to serve up static files through the RSS servlet.  For instance, if you create a file called "bar.xml" and put it in the rss.war\feed-files directory, and put a new line in file.properties that says:
+
+bar = bar.xml
+
+(then restart jboss), you can access the file by going to 
+
+http://myipacserver/rss?type=file&term=bar
+
+5.) feed.xsl, holdsfeed.xsl, itemsoutfeed.xsl and opensearchfeed.xsl control how the XML from your
+catalog is converted to RSS.  If you want your feeds to have a different format, this is the place
+to go.
+
+6.) You can restart the rss application without bringing jboss down by moving the rss.war directory out of the deploy directory on the server, waiting 10 seconds or so, and then putting it back into the deploy directory.  JBoss is cool like that.
+
+7.) opensearchdescriptionfeed.xsl controls how your OpenSearch description document displays.  For more
+info on that, please see http://a9.com/-/spec/opensearchrss/1.0/
+You do not need to alter this unless you plan to offer OpenSearch feeds, and even then you probably don't, because it pulls from the settings that you set up in variables.xsl before.  As a courtesy, please leave "SPL-RSS" in the list of Tags if you do modify it.
+
+8.) rssres.war/xsl/rss.xsl is the stylesheet used by somebody's web browser if they bring up an RSS feed in their web browser instead of an RSS reader.  It makes the RSS feed look pretty instead of just displaying as raw XML.
+
+9.) Just about everything in the system is configurable.  For the sake of simplicity, there are a lot of settings that you can set up in general.properties that are not listed there.  Take a look through the RSSConf.java file to see those settings if you're curious.
+
+10.) If you want to use HTTP BASIC authentication for RSS feeds, you will need to set up JBoss with JAAS security.  See this thread for details:
+
+http://www.theserverside.com/discussions/thread.tss?thread_id=32821
+
+This is a little tricky.  But if you get it set up right, the RSS servlet is smart enough to handle the HTTP BASIC authenticated request -- expecting the username to be the barcode and the password to be the PIN.
+
+11.) to see the raw (un transformed) XML that the servlet is transforming to an RSS feed, you can append &style=passthrough to any URL.
+
+12.) If you want to do actual development on it, any leading IDE such as NetBeans or Eclipse should have a function to create a new project from existing source -- just use it on the source code supplied here.  

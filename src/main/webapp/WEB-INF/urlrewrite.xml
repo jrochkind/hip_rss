@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 2.0//EN"
+    "http://tuckey.org/res/dtds/urlrewrite2.dtd">
+
+<!--
+
+    Configuration file for UrlRewriteFilter
+    http://tuckey.org/urlrewrite/
+
+-->
+<urlrewrite>
+	<!-- here are examples of some rewrite rules that may be cool to use with HIP RSS feeds. 
+		-->
+
+
+	<rule>
+		<from>/opensearch(.*)</from>
+		<to>/rss?type=opensearchdescription</to>
+	</rule>
+
+
+
+<!-- following rules establish friendly names for indexes, etc... -->
+	<rule>
+		<from>(.*)index=name(.*)</from>
+		<to>$1index=.NW$2</to>
+	</rule>
+	<rule>
+		<from>(.*)index=general(.*)</from>
+		<to>$1index=.GW$2</to>
+	</rule>
+	<rule>
+		<from>(.*)index=title(.*)</from>
+		<to>$1index=.TW$2</to>
+	</rule>
+	<rule>
+		<from>(.*)index=subject(.*)</from>
+		<to>$1index=.SW$2</to>
+	</rule>
+<!-- end friendly name section -->
+
+		<!-- URL encode + 
+	<rule>
+		<from>/itemsout(.*)+(.*)</from>
+		<to>/itemsout$1&#2B$2</to>
+	</rule>  -->
+	<rule> 
+	        <!-- maybe should look at using xml entities to store the regular expressions -->
+		<from>/itemsout(.*)barcode=([0-9A-Za-z#/%\-\*\$\.\+]+)&amp;pin=([0-9]+)</from>
+		<to>/rss?type=itemsout&amp;barcode=$2&amp;pin=$3</to>
+	</rule>
+	<rule> 
+		<from>/itemsout(.*)pin=([0-9]+)&amp;barcode=([0-9A-Za-z#/%\-\*\$\.\+]+)</from>
+		<to>/rss?type=itemsout&amp;barcode=$3&amp;pin=$2</to>
+	</rule>
+
+	<!-- to handle new encrypted token id's -->
+	<rule>
+		<from>/itemsout(.*)id=(.*)</from>
+		<to>rss?type=itemsout&amp;id=$2</to>
+	</rule>
+
+	<rule>
+		<from>/holds(.*)barcode=([0-9A-Za-z#/%\-\*\$\.\+]+)&amp;pin=([0-9]+)</from>
+		<to>/rss?type=holds&amp;barcode=$2&amp;pin=$3</to>
+	</rule>
+	<rule>
+		<from>/holds(.*)pin=([0-9]+)&amp;barcode=([0-9A-Za-z#/%\-\*\$\.\+]+)</from>
+		<to>/rss?type=holds&amp;barcode=$3&amp;pin=$2</to>
+	</rule>
+
+	<rule>
+		<from>/holds(.*)id=(.*)</from>
+		<to>rss?type=holds&amp;id=$2</to>
+	</rule>
+
+
+    <rule>
+		<from>/pre/(.+)</from>
+		<to>/rss?type=predef&amp;term=$1</to>
+	</rule>
+	<rule>
+		<from>/itemsout/([0-9A-Za-z-]+)/([0-9A-Za-z-]+)</from> <!-- need to change this line if you have alphanumeric pins -->
+		<to>/rss?type=itemsout&amp;barcode=$1&amp;pin=$2</to>
+	</rule>
+
+
+
+    <!--
+
+    INSTALLATION
+
+        in your web.xml add...
+
+        <filter>
+            <filter-name>UrlRewriteFilter</filter-name>
+            <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+            <init-param>
+                <param-name>logLevel</param-name>
+                <param-value>WARN</param-value>
+            </init-param>
+        </filter>
+        <filter-mapping>
+            <filter-name>UrlRewriteFilter</filter-name>
+            <url-pattern>/*</url-pattern>
+        </filter-mapping>
+
+     EXAMPLES
+
+     Redirect one url
+        <rule>
+            <from>/some/old/page.html</from>
+            <to type="redirect">/very/new/page.html</to>
+        </rule>
+
+    Redirect a directory
+        <rule>
+            <from>/some/olddir/(.*)</from>
+            <to type="redirect">/very/newdir/$1</to>
+        </rule>
+
+    Clean a url
+        <rule>
+            <from>/products/([0-9]+)</from>
+            <to>/products/index.jsp?product_id=$1</to>
+        </rule>
+    eg, /products/1234 will be passed on to /products/index.jsp?product_id=1234 without the user noticing.
+
+    Browser detection
+        <rule>
+            <condition name="user-agent">Mozilla/[1-4]</condition>
+            <from>/some/page.html</from>
+            <to>/some/page-for-old-browsers.html</to>
+        </rule>
+    eg, will pass the request for /some/page.html on to /some/page-for-old-browsers.html only for older
+    browsers whose user agent srtings match Mozilla/1, Mozilla/2, Mozilla/3 or Mozilla/4.
+
+    -->
+
+</urlrewrite>
+
